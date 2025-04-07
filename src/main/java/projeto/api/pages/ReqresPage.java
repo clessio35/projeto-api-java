@@ -50,4 +50,15 @@ public class ReqresPage {
 			System.out.println("RESULT -> FirstName: " + firstName + ", email: " + email);
 		}
 	}
+
+	public void validateResponseSpecificUser(String user) {
+		System.out.println("Validate Specific User -> " + user);
+		response.then()
+			.body("data.id", Matchers.equalTo(Integer.parseInt(user)))
+			.body("data.email", Matchers.not(Matchers.emptyOrNullString()))
+			.body("data.first_name", Matchers.not(Matchers.emptyOrNullString()))
+			.body("data.last_name", Matchers.not(Matchers.emptyOrNullString())).log().body();
+		String responseBody = response.getBody().asString();
+	    System.out.println("Body user validate: " + responseBody);
+	}
 }

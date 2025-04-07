@@ -29,10 +29,9 @@ public class ReqresStep {
 		req.validateResponseUserPage(page);
 	}
 
-	@Then("eu valido os dados do usuário específico")
-	public void eu_valido_os_dados_do_usuário_específico() {
-	     
-	     
+	@Then("eu valido os dados do usuário específico {string}")
+	public void eu_valido_os_dados_do_usuário_específico(String user) {
+	     req.validateResponseSpecificUser(user);
 	}
 
 	@Then("eu valido que o erro retornado tem o status code {string} e a mensagem \"\"Usuário não encontrado\"\"")
