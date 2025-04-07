@@ -7,7 +7,7 @@ Feature: Data manipulated API Reqres
     Then eu valido que a resposta contém a lista de usuários
     Examples:
       | tag   | url                   | endpoint   |
-      | @tag1 | https://reqres.in/api    | /users     |
+      | @tag1 | https://reqres.in/api | /users     |
 
   @listar-paginas
   Scenario: Listar usuários em páginas diferentes
@@ -15,12 +15,12 @@ Feature: Data manipulated API Reqres
     When realizo uma request GET para "<endpoint>"
     Then eu valido a resposta da página "<page>" com a lista de usuários
     Examples:
-      | tag   | url                   | endpoint             | page |
-      | @tag2 | https://reqres.in/api    | /users?page=1        | 1    |
-      | @tag3 | https://reqres.in/api    | /users?page=2        | 2    |
-      | @tag4 | https://reqres.in/api    | /users?page=3        | 3    |
-      | @tag5 | https://reqres.in/api    | /users?page=4        | 4    |
-      | @tag6 | https://reqres.in/api    | /users?page=5        | 5    |
+      | tag  		| url                   | endpoint             | page |
+      | @tag2 	| https://reqres.in/api | /users?page=1        | 1    |
+      | @tag3 	| https://reqres.in/api | /users?page=2        | 2    |
+      | @tag4 	| https://reqres.in/api | /users?page=3        | 3    |
+      | @tag5 	| https://reqres.in/api | /users?page=4        | 4    |
+      | @tag6 	| https://reqres.in/api | /users?page=5        | 5    |
 
   @detalhes-usuario
   Scenario: Obter detalhes de um usuário existente

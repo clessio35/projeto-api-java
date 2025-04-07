@@ -8,26 +8,25 @@ import projeto.api.pages.ReqresPage;
 public class ReqresStep {
 	
 	private ReqresPage req = new ReqresPage();
-	
+
 	@Given("que acesso a API {string}")
 	public void que_acesso_a_api(String url) {
-	    req.accessApi(url);
+		req.accessApi(url);
 	}
-
+	
 	@When("realizo uma request GET para {string}")
 	public void realizo_uma_request_get_para(String endpoint) {
-	    req.requestGETMethod(endpoint);
+		 req.requestGETMethod(endpoint);
 	}
 
 	@Then("eu valido que a resposta contém a lista de usuários")
 	public void eu_valido_que_a_resposta_contém_a_lista_de_usuários() {
 	     req.validateResponseUserList();     
 	}
-
+	
 	@Then("eu valido a resposta da página {string} com a lista de usuários")
-	public void eu_valido_a_resposta_da_página_com_a_lista_de_usuários(String string) {
-	     
-	     
+	public void eu_valido_a_resposta_da_página_com_a_lista_de_usuários(String page) {
+		req.validateResponseUserPage(page);
 	}
 
 	@Then("eu valido os dados do usuário específico")
