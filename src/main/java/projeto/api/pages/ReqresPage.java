@@ -105,4 +105,26 @@ public class ReqresPage {
 			;
 		
 	}
+	
+	public void requestPOSTMethodInvalidMethod(String endpoint, String name, String job) {
+		System.out.println("SEND REQUEST POST METHOD -> Endpoint: " + endpoint);
+		HashMap<String, Object> user = new HashMap<String, Object>();
+		user.put("name", name);
+		user.put("job", job);
+		JSONObject json = new JSONObject(user);
+		response = RestAssured.given()
+					.log().all().contentType(ContentType.JSON)
+					.body(json.toString())
+					.when().post(endpoint);
+	}
+
+	public void validateReturnResponseInvalidMethod(String statusCode, String name, String job) {
+		System.out.println("Validate Return Response With Variation user");
+		int sc = Integer.parseInt(statusCode);
+		String nm = String.format(name);
+		response.then()
+			.log().body().statusCode(sc)
+			.body("name", Matchers.equalTo(nm))
+			.body("job", Matchers.equalTo(job));
+	}
 }

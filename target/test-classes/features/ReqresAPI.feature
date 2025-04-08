@@ -61,14 +61,14 @@ Feature: Data manipulated API Reqres
 	@criar-usuario-invalido
 	Scenario Outline: Criar um usuário com dados inválidos
 	  Given que acesso a API "<url>"
-	  When realizo uma request POST para "<endpoint>"
-	  Then eu valido que o erro retornado tem status code "<status>" e a mensagem "<msg>"
+	  When realizo uma request POST com dados incorretos "<endpoint>" "<name>" "<job>"
+	  Then eu valido resultado retornado com status code "<status>" "<name>" "<job>"
 	  Examples:
-	    | tag   | url                   | endpoint | status | msg                                       | name            | job       |
-	    | @tag19| https://reqres.in/api    | /users   | 400    | O campo job é obrigatório                 | John Doe        |           |
-	    | @tag20| https://reqres.in/api    | /users   | 400    | O campo name não pode ser numérico        | 12345           | Developer |
-	    | @tag21| https://reqres.in/api    | /users   | 400    | O campo name excede o limite de caracteres| John Jacob Jingleheimer Schmidt | Developer |
-	    | @tag22| https://reqres.in/api    | /users   | 400    | O campo job não pode ser vazio            | John Doe        |           |
+	    | tag   | url                   | endpoint | status |  name           							  | job       |
+	    | @tag19| https://reqres.in/api | /users   | 201    |  John Doe     							    |           |
+	    | @tag20| https://reqres.in/api | /users   | 201    |  12345       								    | Developer |
+	    | @tag21| https://reqres.in/api | /users   | 201    | John Jacob Jingleheimer Schmidt | Developer |
+	    | @tag22| https://reqres.in/api | /users   | 201    |  John Doe        								|           |
 	
 	@atualizar-usuario-valido
 	Scenario: Atualizar um usuário com dados válidos

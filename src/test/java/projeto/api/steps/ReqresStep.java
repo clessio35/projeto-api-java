@@ -48,11 +48,15 @@ public class ReqresStep {
 	public void eu_valido_que_a_criação_foi_bem_sucedida_com_status_code_e_os_dados_corretos(String status) {
 		req.validateResponseUserCreated(status);
 	}
+	
+	@When("realizo uma request POST com dados incorretos {string} {string} {string}")
+	public void realizo_uma_request_post_para(String endpoint, String name, String job) {
+		req.requestPOSTMethodInvalidMethod(endpoint, name, job);
+	}
 
-	@Then("eu valido que o erro retornado tem status code {string} e a mensagem {string}")
-	public void eu_valido_que_o_erro_retornado_tem_status_code_e_a_mensagem(String string, String string2) {
-	     
-	     
+	@Then("eu valido resultado retornado com status code {string} {string} {string}")
+	public void eu_valido_resultado_retornado_com_status_code(String statusCode, String name, String job) {
+		req.validateReturnResponseInvalidMethod(statusCode, name, job);
 	}
 
 	@When("realizo uma request PUT para {string}")

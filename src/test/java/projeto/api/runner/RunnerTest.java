@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = "src/test/resources/features",
     glue = "projeto.api.steps",
-    tags = "@criar-usuario-valido", 
+    tags = "@criar-usuario-invalido", 
     plugin = {"pretty", "html:target/cucumber-reports"}
 )
 public class RunnerTest {
