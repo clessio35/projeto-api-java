@@ -2,10 +2,14 @@ package projeto.api.pages;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.hamcrest.Matchers;
+import org.json.JSONObject;
+
+import com.github.javafaker.Faker;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -70,5 +74,35 @@ public class ReqresPage {
 		int statusCode =  Integer.parseInt(status);
 		response.then()
 			.log().body().log().status().statusCode(statusCode);
+	}
+
+	public JSONObject payload() {
+		System.out.println("DATA FAKE");
+		Faker fake = new Faker();
+		HashMap<String, Object> user = new HashMap<String, Object>();
+		user.put("name", fake.name().fullName());
+		user.put("job", fake.job().title());
+		JSONObject json = new JSONObject(user);
+		return json;
+	}
+
+	public void requestPOSTMethod(String endpoint) {
+		System.out.println("SEND REQUEST POST METHOD -> Endpoint: " + endpoint);
+		response = RestAssured.given()
+					.log().all().contentType(ContentType.JSON)
+					.body(payload().toString())
+					.when().post(endpoint);
+	}
+	
+	public void validateResponseUserCreated(String status) {
+		System.out.println("Validate response user created.");
+		int statusCode =  Integer.parseInt(status);
+		response.then()
+			.log().body().log().status().statusCode(statusCode)
+			.body("id", Matchers.not(Matchers.emptyOrNullString()))
+			.body("name", Matchers.not(Matchers.emptyOrNullString()))
+			.body("job", Matchers.not(Matchers.emptyOrNullString()))
+			;
+		
 	}
 }

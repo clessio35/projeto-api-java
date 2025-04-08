@@ -56,7 +56,7 @@ Feature: Data manipulated API Reqres
 	  Then eu valido que a criação foi bem-sucedida com status code "<status>" e os dados corretos
 	  Examples:
 	    | tag   | url                   | endpoint   | status |
-	    | @tag18| https://reqres.in/api    | /users     | 201    |
+	    | @tag18| https://reqres.in/api | /users     | 201    |
 	
 	@criar-usuario-invalido
 	Scenario Outline: Criar um usuário com dados inválidos

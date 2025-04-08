@@ -40,15 +40,13 @@ public class ReqresStep {
 	}
 
 	@When("realizo uma request POST para {string}")
-	public void realizo_uma_request_post_para(String string) {
-	     
-	     
+	public void realizo_uma_request_post_para(String endpoint) {
+		req.requestPOSTMethod(endpoint);
 	}
 
 	@Then("eu valido que a criação foi bem-sucedida com status code {string} e os dados corretos")
-	public void eu_valido_que_a_criação_foi_bem_sucedida_com_status_code_e_os_dados_corretos(String string) {
-	     
-	     
+	public void eu_valido_que_a_criação_foi_bem_sucedida_com_status_code_e_os_dados_corretos(String status) {
+		req.validateResponseUserCreated(status);
 	}
 
 	@Then("eu valido que o erro retornado tem status code {string} e a mensagem {string}")
