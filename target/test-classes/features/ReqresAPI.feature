@@ -44,10 +44,10 @@ Feature: Data manipulated API Reqres
 	Scenario: Obter detalhes de um usuário inexistente
 	  Given que acesso a API "<url>"
 	  When realizo uma request GET para "<endpoint>"
-	  Then eu valido que o erro retornado tem o status code "<status>" e a mensagem "<msg>"
+	  Then eu valido que o erro retornado tem o status code "<status>"
 	  Examples:
-	    | tag   | url                   | endpoint         | status | msg                           |
-	    | @tag17| https://reqres.in/api    | /users/9999      | 404    | "Usuário não encontrado"      |
+	    | tag   | url                   | endpoint         | status | msg |
+	    | @tag17| https://reqres.in/api | /users/9999      | 404    |     |
 	
 	@criar-usuario-valido
 	Scenario: Criar um usuário com dados válidos

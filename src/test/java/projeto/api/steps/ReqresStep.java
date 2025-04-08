@@ -34,10 +34,9 @@ public class ReqresStep {
 	     req.validateResponseSpecificUser(user);
 	}
 
-	@Then("eu valido que o erro retornado tem o status code {string} e a mensagem \"\"Usuário não encontrado\"\"")
-	public void eu_valido_que_o_erro_retornado_tem_o_status_code_e_a_mensagem_usuário_não_encontrado(String string) {
-	     
-	     
+	@Then("eu valido que o erro retornado tem o status code {string}")
+	public void eu_valido_que_o_erro_retornado_tem_o_status_code(String status) {
+		req.validateResponseInexistanceUser(status);
 	}
 
 	@When("realizo uma request POST para {string}")

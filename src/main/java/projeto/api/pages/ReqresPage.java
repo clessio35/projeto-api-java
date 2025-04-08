@@ -31,6 +31,7 @@ public class ReqresPage {
 	
 	public void validateResponseUserList() {
 		System.out.println("VALIDATE RESPONSE");
+		response.then().log().status().statusCode(200).log().body();
 		List<Map<String, Object>> data = response.jsonPath().getList("data");
 		for (Map<String, Object> user : data) {
 			String firstName = (String) user.get("first_name");
@@ -41,7 +42,8 @@ public class ReqresPage {
 
 	public void validateResponseUserPage(String page) {
 		System.out.println("VALIDATE RESPONSE WITH USER PAGE -> " + page);
-		response.then().body("page", Matchers.equalTo(Integer.parseInt(page)));
+		response.then().log().status().statusCode(200)
+		.body("page", Matchers.equalTo(Integer.parseInt(page))).log().body();
 		List<Map<String, Object>> data = response.jsonPath().getList("data");
 		for(Map<String, Object> user : data) {
 			String email = user.get("email").toString();
@@ -54,11 +56,19 @@ public class ReqresPage {
 	public void validateResponseSpecificUser(String user) {
 		System.out.println("Validate Specific User -> " + user);
 		response.then()
+			.log().status().statusCode(200)
 			.body("data.id", Matchers.equalTo(Integer.parseInt(user)))
 			.body("data.email", Matchers.not(Matchers.emptyOrNullString()))
 			.body("data.first_name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("data.last_name", Matchers.not(Matchers.emptyOrNullString())).log().body();
 		String responseBody = response.getBody().asString();
 	    System.out.println("Body user validate: " + responseBody);
+	}
+
+	public void validateResponseInexistanceUser(String status) {
+		System.out.println("Validate Inexistance User");
+		int statusCode =  Integer.parseInt(status);
+		response.then()
+			.log().body().log().status().statusCode(statusCode);
 	}
 }
