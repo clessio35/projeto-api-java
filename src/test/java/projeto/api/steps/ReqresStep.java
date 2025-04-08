@@ -68,11 +68,15 @@ public class ReqresStep {
 	public void eu_valido_que_os_dados_do_usuário_foram_atualizados() {
 		req.validateResponseUpdateUser();
 	}
+	
+	@When("realizo uma request PUT para {string} faltando informacoes")
+	public void realizo_uma_request_put_para_faltando_informacoes(String endpoint) {
+	     req.requestPUTMethodWithoutInformation(endpoint);
+	}
 
-	@Then("eu valido que o erro retornado tem status code {string} e a mensagem \"\"O campo {string} é obrigatório\"\"")
-	public void eu_valido_que_o_erro_retornado_tem_status_code_e_a_mensagem_o_campo_é_obrigatório(String string, String string2) {
-	     
-	     
+	@Then("eu valido a alteracao com ausencia de informacao")
+	public void eu_valido_a_alteracao_com_ausencia_de_informacao() {
+		req.validateResponseUpdateWithoutInformation();
 	}
 
 	@When("realizo uma request DELETE para {string}")

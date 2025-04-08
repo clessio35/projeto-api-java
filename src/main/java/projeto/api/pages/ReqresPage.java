@@ -141,4 +141,27 @@ public class ReqresPage {
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("job", Matchers.not(Matchers.emptyOrNullString()));
 	}
+	
+	public void requestPUTMethodWithoutInformation(String endpoint) {
+		System.out.println("Update Method without job");
+		Faker fake = new Faker();
+		HashMap<String, Object> user = new HashMap<String, Object>();
+		user.put("name", fake.name().fullName());
+		user.put("job", "");
+		JSONObject json = new JSONObject(user);
+		response = RestAssured.given()
+					.log().all().contentType(ContentType.JSON)
+					.body(json.toString())
+					.when().put(endpoint);
+	}
+
+	public void validateResponseUpdateWithoutInformation() {
+		System.out.println("Validate Update Method");
+		response.then()
+			.log().body().statusCode(200)
+			.body("name", Matchers.not(Matchers.emptyOrNullString()))
+			.body("job", Matchers.equalTo(""));
+	}
+
+	
 }

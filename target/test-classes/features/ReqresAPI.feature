@@ -82,11 +82,11 @@ Feature: Data manipulated API Reqres
 	@atualizar-usuario-faltando-dados
 	Scenario: Atualizar um usuário com dados faltando
 	  Given que acesso a API "<url>"
-	  When realizo uma request PUT para "<endpoint>"
-	  Then eu valido que o erro retornado tem status code "<status>" e a mensagem "<msg>"
+	  When realizo uma request PUT para "<endpoint>" faltando informacoes
+	  Then eu valido a alteracao com ausencia de informacao
 	  Examples:
-	    | tag   | url                   | endpoint   | status | msg                                   |
-	    | @tag24| https://reqres.in/api    | /users/2   | 400    | "O campo 'job' é obrigatório"         |
+	    | tag   | url                   | endpoint   | 
+	    | @tag24| https://reqres.in/api | /users/2   | 
 	
 	@excluir-usuario-existente
 	Scenario: Excluir um usuário existente
