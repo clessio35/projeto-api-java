@@ -74,10 +74,10 @@ Feature: Data manipulated API Reqres
 	Scenario: Atualizar um usuário com dados válidos
 	  Given que acesso a API "<url>"
 	  When realizo uma request PUT para "<endpoint>"
-	  Then eu valido que os dados do usuário foram atualizados com status code "<status>"
+	  Then eu valido que os dados do usuário foram atualizados
 	  Examples:
-	    | tag   | url                   | endpoint   | status |
-	    | @tag23| https://reqres.in/api    | /users/2   | 201    |
+	    | tag   | url                   | endpoint   |
+	    | @tag23| https://reqres.in/api | /users/2   |
 	
 	@atualizar-usuario-faltando-dados
 	Scenario: Atualizar um usuário com dados faltando

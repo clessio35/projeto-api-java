@@ -101,9 +101,7 @@ public class ReqresPage {
 			.log().body().log().status().statusCode(statusCode)
 			.body("id", Matchers.not(Matchers.emptyOrNullString()))
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
-			.body("job", Matchers.not(Matchers.emptyOrNullString()))
-			;
-		
+			.body("job", Matchers.not(Matchers.emptyOrNullString()));
 	}
 	
 	public void requestPOSTMethodInvalidMethod(String endpoint, String name, String job) {
@@ -126,5 +124,21 @@ public class ReqresPage {
 			.log().body().statusCode(sc)
 			.body("name", Matchers.equalTo(nm))
 			.body("job", Matchers.equalTo(job));
+	}
+
+	public void requestPUTMethod(String endpoint) {
+		System.out.println("Update Method");
+		response = RestAssured.given()
+					.log().all().contentType(ContentType.JSON)
+					.body(payload().toString())
+					.when().put(endpoint);
+	}
+
+	public void validateResponseUpdateUser() {
+		System.out.println("Validate Update Method");
+		response.then()
+			.log().body().statusCode(200)
+			.body("name", Matchers.not(Matchers.emptyOrNullString()))
+			.body("job", Matchers.not(Matchers.emptyOrNullString()));
 	}
 }

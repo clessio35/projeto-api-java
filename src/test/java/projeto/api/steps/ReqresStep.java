@@ -60,15 +60,13 @@ public class ReqresStep {
 	}
 
 	@When("realizo uma request PUT para {string}")
-	public void realizo_uma_request_put_para(String string) {
-	     
-	     
+	public void realizo_uma_request_put_para(String endpoint) {
+	     req.requestPUTMethod(endpoint);
 	}
 
-	@Then("eu valido que os dados do usuário foram atualizados com status code {string}")
-	public void eu_valido_que_os_dados_do_usuário_foram_atualizados_com_status_code(String string) {
-	     
-	     
+	@Then("eu valido que os dados do usuário foram atualizados")
+	public void eu_valido_que_os_dados_do_usuário_foram_atualizados() {
+		req.validateResponseUpdateUser();
 	}
 
 	@Then("eu valido que o erro retornado tem status code {string} e a mensagem \"\"O campo {string} é obrigatório\"\"")
