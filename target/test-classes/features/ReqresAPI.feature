@@ -147,17 +147,17 @@ Feature: Data manipulated API Reqres
 	Scenario: Listar vários usuários com paginação
 	  Given que acesso a API "<url>"
 	  When realizo uma request GET para "<endpoint>"
-	  Then eu valido que a lista de usuários foi retornada corretamente e paginada
+	  Then eu valido a resposta da página "<page>" com a lista de usuários
 	  Examples:
-	    | tag   | url                  	   | endpoint               | status |
-	    | @tag32| https://reqres.in/api    | /users?page=1          | 200    |
-	    | @tag33| https://reqres.in/api    | /users?page=2          | 200    |
+	    | tag   | url                  	   | endpoint               | status | page |
+	    | @tag32| https://reqres.in/api    | /users?page=1          | 200    |1			|
+	    | @tag33| https://reqres.in/api    | /users?page=2          | 200    |2			|	
 	
 	@criar-multiplo-usuarios
 	Scenario Outline: Criar múltiplos usuários
 	  Given que acesso a API "<url>"
-	  When realizo uma request POST para "<endpoint>"
-	  Then eu valido que o status code é "<status>" e os dados estão corretos
+	  When realizo uma request POST com dados incorretos "<endpoint>" "<name>" "<job>"
+	  Then eu valido resultado retornado com status code "<status>" "<name>" "<job>"
 	  Examples:
 	    | tag   | url                   	 | endpoint   | name    | job      | status |
 	    | @tag34| https://reqres.in/api    | /users     | Alice   | Developer| 201    |
@@ -167,8 +167,8 @@ Feature: Data manipulated API Reqres
 	@atualizar-usuario-faltando-job
 	Scenario: Atualizar um usuário com dados faltando
 	  Given que acesso a API "<url>"
-	  When realizo uma request PUT para "<endpoint>"
-	  Then eu valido que o erro retornado tem status code "<status>" e a mensagem "<msg>"
+	  When realizo uma request PUT para "<endpoint>" faltando informacoes
+	  Then eu valido a alteracao com ausencia de informacao
 	  Examples:
-	    | tag   | url                   | endpoint     | status | msg                                   |
-	    | @tag37| https://reqres.in/api | /users/2     | 400    | "O campo 'job' é obrigatório"         |
+	    | tag   | url                   | endpoint     | 
+	    | @tag37| https://reqres.in/api | /users/2     |
