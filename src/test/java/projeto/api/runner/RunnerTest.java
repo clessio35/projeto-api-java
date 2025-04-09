@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = "src/test/resources/features",
     glue = "projeto.api.steps",
-    tags = "@criar-multiplo-usuarios", 
+    tags = "@atualizar-usuario-faltando-job", 
     plugin = {"pretty", "html:target/cucumber-reports"}
 )
 public class RunnerTest {
