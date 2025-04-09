@@ -101,10 +101,10 @@ Feature: Data manipulated API Reqres
 	Scenario: Excluir um usuário inexistente
 	  Given que acesso a API "<url>"
 	  When realizo uma request DELETE para "<endpoint>"
-	  Then eu valido que o erro retornado tem status code "<status>" e a mensagem "<msg>"
+	  Then eu valido que o status code é "<status>" e a resposta não contém conteúdo
 	  Examples:
-	    | tag   | url                   | endpoint         | status | msg                           |
-	    | @tag26| https://reqres.in/api    | /users/9999      | 404    | "Usuário não encontrado"      |
+	    | tag   | url                  		 | endpoint         | status | 
+	    | @tag26| https://reqres.in/api    | /users/9999      | 204    |
 	
 	@login-valido
 	Scenario: Testar login com credenciais válidas

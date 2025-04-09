@@ -89,11 +89,6 @@ public class ReqresStep {
 		req.validateReturnRequestDelete(status);
 	}
 
-	@Then("eu valido que o erro retornado tem status code {string} e a mensagem \"\"Usuário não encontrado\"\"")
-	public void eu_valido_que_o_erro_retornado_tem_status_code_e_a_mensagem_usuário_não_encontrado(String string) {
-	     
-	     
-	}
 
 	@Then("eu valido que o status code é {string} e a resposta contém um token válido")
 	public void eu_valido_que_o_status_code_é_e_a_resposta_contém_um_token_válido(String string) {
