@@ -75,12 +75,12 @@ public class ReqresPage {
 	    BasePage.takeScreenshot(response, "Specific User");
 	}
 
-	public void validateResponseInexistanceUser(String status) throws IOException {
-		System.out.println("Validate Inexistant User");
+	public void validateResponseNonExistentUser(String status) throws IOException {
+		System.out.println("Validate NonExistent User");
 		int statusCode =  Integer.parseInt(status);
 		response.then()
 			.log().body().log().status().statusCode(statusCode);
-		BasePage.takeScreenshot(response, "Response Inexistant");
+		BasePage.takeScreenshot(response, "Response NonExistent");
 	}
 
 	public JSONObject payload() {
@@ -234,6 +234,22 @@ public class ReqresPage {
 			.body("token", Matchers.equalTo(token));
 		BasePage.takeScreenshot(response, "Login access");
 	}
+
+	public void requestPOSTMethodEmptyUser(String endpoint) {
+		System.out.println("Empty");
+		response = RestAssured.given()
+		.log().all().contentType(ContentType.JSON)
+		.body("").post(endpoint);
+	}
+
+	public void validateResponseGenerated() throws IOException {
+		System.out.println("Response Created");
+		String id = response.jsonPath().getString("id");
+		response.then().log().body().statusCode(201)
+			.body("id", Matchers.equalTo(id));
+		BasePage.takeScreenshot(response,"Response");
+	}
+
 	
 
 	

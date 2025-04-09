@@ -38,7 +38,7 @@ public class ReqresStep {
 
 	@Then("eu valido que o erro retornado tem o status code {string}")
 	public void eu_valido_que_o_erro_retornado_tem_o_status_code(String status) throws IOException {
-		req.validateResponseInexistanceUser(status);
+		req.validateResponseNonExistentUser(status);
 	}
 
 	@When("realizo uma request POST para {string}")
@@ -105,7 +105,20 @@ public class ReqresStep {
 	public void eu_valido_que_erro_retornado_e_a_mensagem(String status, String msg) throws IOException {
 		req.validateResponseLoginUnsuccessfull(status, msg);  
 	}
-	
+
+	@When("realizo uma request POST sem dados para {string}")
+	public void realizo_uma_request_post_sem_dados_para(String endpoint) throws IOException {
+	    req.requestPOSTMethodEmptyUser(endpoint);
+	}
+
+
+
+
+	@Then("eu valido o response gerado")
+	public void eu_valido_o_response_gerado() throws IOException {
+	    req.validateResponseGenerated();
+	}
+
 
 	@Then("eu valido que a lista de usuários foi retornada corretamente e paginada")
 	public void eu_valido_que_a_lista_de_usuários_foi_retornada_corretamente_e_paginada() {

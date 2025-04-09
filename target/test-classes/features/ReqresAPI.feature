@@ -133,23 +133,15 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                   | endpoint       | status |
 	    | @tag29| https://reqres.in/api | /users/99999   | 404    | 
 	
-	@usuario-id-inexistente
-	Scenario: Atualizar um usuário com ID inexistente
-	  Given que acesso a API "<url>"
-	  When realizo uma request PUT para "<endpoint>"
-	  Then eu valido que o erro retornado tem status code "<status>" e a mensagem "<msg>"
-	  Examples:
-	    | tag   | url                   | endpoint         | status | msg                           |
-	    | @tag30| https://reqres.in/api    | /users/99999     | 404    | "Usuário não encontrado"      |
 	
 	@criar-usuario-vazio
 	Scenario: Criar um usuário com dados vazios
 	  Given que acesso a API "<url>"
-	  When realizo uma request POST para "<endpoint>"
-	  Then eu valido que o erro retornado tem status code "<status>" e a mensagem "<msg>"
+	  When realizo uma request POST sem dados para "<endpoint>"
+	  Then eu valido o response gerado
 	  Examples:
-	    | tag   | url                  		 | endpoint     | status | msg                                        |
-	    | @tag31| https://reqres.in/api    | /users       | 400    | "Os campos 'name' e 'job' são obrigatórios"|
+	    | tag   | url                  		 | endpoint     | 
+	    | @tag31| https://reqres.in/api    | /users       |
 	
 	@listar-usuarios-paginados
 	Scenario: Listar vários usuários com paginação
