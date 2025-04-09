@@ -2,6 +2,7 @@ package projeto.api.pages;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class ReqresPage {
 					.get(endpoint);
 	}
 	
-	public void validateResponseUserList() {
+	public void validateResponseUserList() throws IOException {
 		System.out.println("VALIDATE RESPONSE");
 		response.then().log().status().statusCode(200).log().body();
 		List<Map<String, Object>> data = response.jsonPath().getList("data");
@@ -44,10 +45,10 @@ public class ReqresPage {
 			assertTrue("The 'first_name' can't be null", firstName != null && !firstName.isEmpty());
 			System.out.println("RESULT -> " + firstName);
 		}
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Validate Response User List");
 	}
 
-	public void validateResponseUserPage(String page) {
+	public void validateResponseUserPage(String page) throws IOException {
 		System.out.println("VALIDATE RESPONSE WITH USER PAGE -> " + page);
 		response.then().log().status().statusCode(200)
 		.body("page", Matchers.equalTo(Integer.parseInt(page))).log().body();
@@ -58,10 +59,10 @@ public class ReqresPage {
 			assertTrue(!email.isEmpty() &&  !firstName.isEmpty());
 			System.out.println("RESULT -> FirstName: " + firstName + ", email: " + email);
 		}
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Response user page");
 	}
 
-	public void validateResponseSpecificUser(String user) {
+	public void validateResponseSpecificUser(String user) throws IOException {
 		System.out.println("Validate Specific User -> " + user);
 		response.then()
 			.log().status().statusCode(200)
@@ -71,15 +72,15 @@ public class ReqresPage {
 			.body("data.last_name", Matchers.not(Matchers.emptyOrNullString())).log().body();
 		String responseBody = response.getBody().asString();
 	    System.out.println("Body user validate: " + responseBody);
-	    BasePage.takeScreenshot(response);
+	    BasePage.takeScreenshot(response, "Specific User");
 	}
 
-	public void validateResponseInexistanceUser(String status) {
-		System.out.println("Validate Inexistance User");
+	public void validateResponseInexistanceUser(String status) throws IOException {
+		System.out.println("Validate Inexistant User");
 		int statusCode =  Integer.parseInt(status);
 		response.then()
 			.log().body().log().status().statusCode(statusCode);
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Response Inexistant");
 	}
 
 	public JSONObject payload() {
@@ -116,7 +117,7 @@ public class ReqresPage {
 		}
 	}
 	
-	public void validateResponseUserCreated(String status) {
+	public void validateResponseUserCreated(String status) throws IOException {
 		System.out.println("Validate response user created.");
 		int statusCode =  Integer.parseInt(status);
 		response.then()
@@ -124,7 +125,7 @@ public class ReqresPage {
 			.body("id", Matchers.not(Matchers.emptyOrNullString()))
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("job", Matchers.not(Matchers.emptyOrNullString()));
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "User created");
 	}
 	
 	public void requestPOSTMethodInvalidMethod(String endpoint, String name, String job) {
@@ -139,7 +140,7 @@ public class ReqresPage {
 					.when().post(endpoint);
 	}
 
-	public void validateReturnResponseInvalidMethod(String statusCode, String name, String job) {
+	public void validateReturnResponseInvalidMethod(String statusCode, String name, String job) throws IOException {
 		System.out.println("Validate Return Response With Variation user");
 		int sc = Integer.parseInt(statusCode);
 		String nm = String.format(name);
@@ -147,7 +148,7 @@ public class ReqresPage {
 			.log().body().statusCode(sc)
 			.body("name", Matchers.equalTo(nm))
 			.body("job", Matchers.equalTo(job));
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Response Invalid method");
 	}
 
 	public void requestPUTMethod(String endpoint) {
@@ -158,13 +159,13 @@ public class ReqresPage {
 					.when().put(endpoint);
 	}
 
-	public void validateResponseUpdateUser() {
+	public void validateResponseUpdateUser() throws IOException {
 		System.out.println("Validate Update Method");
 		response.then()
 			.log().body().statusCode(200)
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("job", Matchers.not(Matchers.emptyOrNullString()));
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Update User");
 	}
 	
 	public void requestPUTMethodWithoutInformation(String endpoint) {
@@ -180,13 +181,13 @@ public class ReqresPage {
 					.when().put(endpoint);
 	}
 
-	public void validateResponseUpdateWithoutInformation() {
+	public void validateResponseUpdateWithoutInformation() throws IOException {
 		System.out.println("Validate Update Method");
 		response.then()
 			.log().body().statusCode(200)
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("job", Matchers.equalTo(""));
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Update Without information");
 	}
 
 	public void requestDELETEMethod(String endpoint) {
@@ -196,22 +197,22 @@ public class ReqresPage {
 			.when().delete(endpoint);
 	}
 
-	public void validateReturnRequestDelete(String status) {
+	public void validateReturnRequestDelete(String status) throws IOException {
 		System.out.println("Validate DELETE Method");
 		int sc = Integer.parseInt(status);
 		response.then()
 			.log().body().statusCode(sc);
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Delete");
 	}
 
-	public void validateResponseLoginUnsuccessfull(String status, String msg) {
+	public void validateResponseLoginUnsuccessfull(String status, String msg) throws IOException {
 		System.out.println("Validate Login access");
 		response.then()
 			.log().body().statusCode(400);
 		String error = response.jsonPath().getString("error");
 		System.out.println("Error captured: " + error);
 		Assert.assertEquals(error, msg);
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Login unsuccessfull");
 	}
 
 	public void requestPOSTMethodLoginData(String endpoint) {
@@ -225,13 +226,13 @@ public class ReqresPage {
 			.body(json.toString()).post(endpoint);
 		}
 
-	public void validateResponseLoginAccess() {
+	public void validateResponseLoginAccess() throws IOException {
 		System.out.println("Validate Login Access");
 		String token = response.jsonPath().getString("token");
 		System.out.println("TOKEN: " + token);
 		response.then().log().status().statusCode(200)
 			.body("token", Matchers.equalTo(token));
-		BasePage.takeScreenshot(response);
+		BasePage.takeScreenshot(response, "Login access");
 	}
 	
 
