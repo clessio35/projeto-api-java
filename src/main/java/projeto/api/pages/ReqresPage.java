@@ -14,6 +14,7 @@ import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import projeto.api.utils.BasePage;
 
 public class ReqresPage {
 	
@@ -42,6 +43,7 @@ public class ReqresPage {
 			assertTrue("The 'first_name' can't be null", firstName != null && !firstName.isEmpty());
 			System.out.println("RESULT -> " + firstName);
 		}
+		BasePage.takeScreenshot(response);
 	}
 
 	public void validateResponseUserPage(String page) {
@@ -55,6 +57,7 @@ public class ReqresPage {
 			assertTrue(!email.isEmpty() &&  !firstName.isEmpty());
 			System.out.println("RESULT -> FirstName: " + firstName + ", email: " + email);
 		}
+		BasePage.takeScreenshot(response);
 	}
 
 	public void validateResponseSpecificUser(String user) {
@@ -67,6 +70,7 @@ public class ReqresPage {
 			.body("data.last_name", Matchers.not(Matchers.emptyOrNullString())).log().body();
 		String responseBody = response.getBody().asString();
 	    System.out.println("Body user validate: " + responseBody);
+	    BasePage.takeScreenshot(response);
 	}
 
 	public void validateResponseInexistanceUser(String status) {
@@ -74,6 +78,7 @@ public class ReqresPage {
 		int statusCode =  Integer.parseInt(status);
 		response.then()
 			.log().body().log().status().statusCode(statusCode);
+		BasePage.takeScreenshot(response);
 	}
 
 	public JSONObject payload() {
@@ -102,6 +107,7 @@ public class ReqresPage {
 			.body("id", Matchers.not(Matchers.emptyOrNullString()))
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("job", Matchers.not(Matchers.emptyOrNullString()));
+		BasePage.takeScreenshot(response);
 	}
 	
 	public void requestPOSTMethodInvalidMethod(String endpoint, String name, String job) {
@@ -124,6 +130,7 @@ public class ReqresPage {
 			.log().body().statusCode(sc)
 			.body("name", Matchers.equalTo(nm))
 			.body("job", Matchers.equalTo(job));
+		BasePage.takeScreenshot(response);
 	}
 
 	public void requestPUTMethod(String endpoint) {
@@ -140,6 +147,7 @@ public class ReqresPage {
 			.log().body().statusCode(200)
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("job", Matchers.not(Matchers.emptyOrNullString()));
+		BasePage.takeScreenshot(response);
 	}
 	
 	public void requestPUTMethodWithoutInformation(String endpoint) {
@@ -161,6 +169,7 @@ public class ReqresPage {
 			.log().body().statusCode(200)
 			.body("name", Matchers.not(Matchers.emptyOrNullString()))
 			.body("job", Matchers.equalTo(""));
+		BasePage.takeScreenshot(response);
 	}
 
 	public void requestDELETEMethod(String endpoint) {
@@ -175,6 +184,7 @@ public class ReqresPage {
 		int sc = Integer.parseInt(status);
 		response.then()
 			.log().body().statusCode(sc);
+		BasePage.takeScreenshot(response);
 	}
 	
 
