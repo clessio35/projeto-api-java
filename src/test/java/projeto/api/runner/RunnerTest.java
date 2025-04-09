@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = "src/test/resources/features",
     glue = "projeto.api.steps",
-    tags = "@atualizar-usuario-faltando-dados", 
+    tags = "@excluir-usuario-existente", 
     plugin = {"pretty", "html:target/cucumber-reports"}
 )
 public class RunnerTest {

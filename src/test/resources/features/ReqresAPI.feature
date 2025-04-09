@@ -95,7 +95,7 @@ Feature: Data manipulated API Reqres
 	  Then eu valido que o status code é "<status>" e a resposta não contém conteúdo
 	  Examples:
 	    | tag   | url                   | endpoint     | status |
-	    | @tag25| https://reqres.in/api    | /users/2     | 204    |
+	    | @tag25| https://reqres.in/api | /users/2     | 204    |
 	
 	@excluir-usuario-inexistente
 	Scenario: Excluir um usuário inexistente

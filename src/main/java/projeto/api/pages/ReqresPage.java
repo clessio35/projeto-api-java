@@ -163,5 +163,20 @@ public class ReqresPage {
 			.body("job", Matchers.equalTo(""));
 	}
 
+	public void requestDELETEMethod(String endpoint) {
+		System.out.println("Request DELETE Method");
+		response = RestAssured.given()
+			.log().all().contentType(ContentType.JSON)
+			.when().delete(endpoint);
+	}
+
+	public void validateReturnRequestDelete(String status) {
+		System.out.println("Validate DELETE Method");
+		int sc = Integer.parseInt(status);
+		response.then()
+			.log().body().statusCode(sc);
+	}
+	
+
 	
 }

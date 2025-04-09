@@ -80,15 +80,13 @@ public class ReqresStep {
 	}
 
 	@When("realizo uma request DELETE para {string}")
-	public void realizo_uma_request_delete_para(String string) {
-	     
-	     
+	public void realizo_uma_request_delete_para(String endpoint) {
+		req.requestDELETEMethod(endpoint);
 	}
 
 	@Then("eu valido que o status code é {string} e a resposta não contém conteúdo")
-	public void eu_valido_que_o_status_code_é_e_a_resposta_não_contém_conteúdo(String string) {
-	     
-	     
+	public void eu_valido_que_o_status_code_é_e_a_resposta_não_contém_conteúdo(String status) {
+		req.validateReturnRequestDelete(status);
 	}
 
 	@Then("eu valido que o erro retornado tem status code {string} e a mensagem \"\"Usuário não encontrado\"\"")
