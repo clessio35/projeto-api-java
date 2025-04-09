@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = "src/test/resources/features",
     glue = "projeto.api.steps",
-    tags = "@login-sem-credenciais", 
+    tags = "@login-valido", 
     plugin = {"pretty", "html:target/cucumber-reports"}
 )
 public class RunnerTest {

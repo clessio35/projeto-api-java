@@ -109,7 +109,7 @@ Feature: Data manipulated API Reqres
 	@login-valido
 	Scenario: Testar login com credenciais válidas
 	  Given que acesso a API "<url>"
-	  When realizo uma request POST para "<endpoint>"
+	  When realizo uma request POST com as informacoes de login para "<endpoint>"
 	  Then eu valido que a resposta contém um token
 	  Examples:
 	    | tag   | url                  		 | endpoint   |

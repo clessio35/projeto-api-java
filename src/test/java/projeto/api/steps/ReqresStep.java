@@ -88,10 +88,15 @@ public class ReqresStep {
 	public void eu_valido_que_o_status_code_é_e_a_resposta_não_contém_conteúdo(String status) {
 		req.validateReturnRequestDelete(status);
 	}
+	
+	@When("realizo uma request POST com as informacoes de login para {string}")
+	public void realizo_uma_request_post_com_as_informacoes_de_login_para(String endpoint) {
+		req.requestPOSTMethodLoginData(endpoint);
+	}
 
 	@Then("eu valido que a resposta contém um token")
 	public void eu_valido_que_a_resposta_contém_um_token() {
-	     
+	     req.validateResponseLoginAccess();
 	}
 
 	@Then("eu valido que erro retornado e a mensagem {string} {string}")

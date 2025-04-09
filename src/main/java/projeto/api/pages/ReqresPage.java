@@ -213,6 +213,26 @@ public class ReqresPage {
 		Assert.assertEquals(error, msg);
 		BasePage.takeScreenshot(response);
 	}
+
+	public void requestPOSTMethodLoginData(String endpoint) {
+		System.out.println("Request POST Login data");
+		HashMap<String, Object> login = new HashMap<String, Object>();
+		login.put("email", "eve.holt@reqres.in");
+		login.put("password", "cityslicka");
+		JSONObject json = new JSONObject(login);
+		response = RestAssured.given()
+			.log().all().when().contentType(ContentType.JSON)
+			.body(json.toString()).post(endpoint);
+		}
+
+	public void validateResponseLoginAccess() {
+		System.out.println("Validate Login Access");
+		String token = response.jsonPath().getString("token");
+		System.out.println("TOKEN: " + token);
+		response.then().log().status().statusCode(200)
+			.body("token", Matchers.equalTo(token));
+		BasePage.takeScreenshot(response);
+	}
 	
 
 	
