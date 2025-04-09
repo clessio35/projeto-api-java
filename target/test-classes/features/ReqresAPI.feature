@@ -110,19 +110,19 @@ Feature: Data manipulated API Reqres
 	Scenario: Testar login com credenciais válidas
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST para "<endpoint>"
-	  Then eu valido que o status code é "<status>" e a resposta contém um token válido
+	  Then eu valido que a resposta contém um token
 	  Examples:
-	    | tag   | url                   | endpoint   | status |
-	    | @tag27| https://reqres.in/api    | /login     | 200    |
+	    | tag   | url                  		 | endpoint   |
+	    | @tag27| https://reqres.in/api    | /login     |
 	
 	@login-sem-credenciais
 	Scenario: Testar login sem fornecer credenciais
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST para "<endpoint>"
-	  Then eu valido que o erro retornado tem status code "<status>" e a mensagem "<msg>"
+	  Then eu valido que erro retornado e a mensagem "<status>" "<msg>"
 	  Examples:
-	    | tag   | url                   | endpoint   | status | msg                                  |
-	    | @tag28| https://reqres.in/api    | /login     | 400    | "Credenciais ausentes"              |
+	    | tag   | url                   | endpoint   | status | msg                         |
+	    | @tag28| https://reqres.in/api | /login     | 400    | user not found              |
 	
 	@usuario-inexistente
 	Scenario: Obter detalhes de um usuário inexistente

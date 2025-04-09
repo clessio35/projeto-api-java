@@ -89,18 +89,16 @@ public class ReqresStep {
 		req.validateReturnRequestDelete(status);
 	}
 
-
-	@Then("eu valido que o status code é {string} e a resposta contém um token válido")
-	public void eu_valido_que_o_status_code_é_e_a_resposta_contém_um_token_válido(String string) {
-	     
+	@Then("eu valido que a resposta contém um token")
+	public void eu_valido_que_a_resposta_contém_um_token() {
 	     
 	}
 
-	@Then("eu valido que o erro retornado tem status code {string} e a mensagem \"\"Credenciais ausentes\"\"")
-	public void eu_valido_que_o_erro_retornado_tem_status_code_e_a_mensagem_credenciais_ausentes(String string) {
-	     
-	     
+	@Then("eu valido que erro retornado e a mensagem {string} {string}")
+	public void eu_valido_que_erro_retornado_e_a_mensagem(String status, String msg) {
+		req.validateResponseLoginUnsuccessfull(status, msg);  
 	}
+	
 
 	@Then("eu valido que o erro retornado tem status code {string} e a mensagem \"\"Os campos {string} e {string} são obrigatórios\"\"")
 	public void eu_valido_que_o_erro_retornado_tem_status_code_e_a_mensagem_os_campos_e_são_obrigatórios(String string, String string2, String string3) {

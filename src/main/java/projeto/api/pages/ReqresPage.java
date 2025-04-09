@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
+import org.junit.Assert;
 
 import com.github.javafaker.Faker;
 
@@ -90,13 +91,29 @@ public class ReqresPage {
 		JSONObject json = new JSONObject(user);
 		return json;
 	}
+	public JSONObject login() {
+		System.out.println("DATA FAKE");
+		Faker fake = new Faker();
+		HashMap<String, Object> user = new HashMap<String, Object>();
+		user.put("email", fake.internet().emailAddress());
+		user.put("password", fake.internet().password(10, 12));
+		JSONObject json = new JSONObject(user);
+		return json;
+	}
 
 	public void requestPOSTMethod(String endpoint) {
 		System.out.println("SEND REQUEST POST METHOD -> Endpoint: " + endpoint);
-		response = RestAssured.given()
+		if(endpoint.trim().equals("/login")) {
+			response = RestAssured.given()
+					.log().all().contentType(ContentType.JSON)
+					.body(login().toString())
+					.when().post(endpoint);		
+		}else {
+			response = RestAssured.given()
 					.log().all().contentType(ContentType.JSON)
 					.body(payload().toString())
-					.when().post(endpoint);
+					.when().post(endpoint);			
+		}
 	}
 	
 	public void validateResponseUserCreated(String status) {
@@ -184,6 +201,16 @@ public class ReqresPage {
 		int sc = Integer.parseInt(status);
 		response.then()
 			.log().body().statusCode(sc);
+		BasePage.takeScreenshot(response);
+	}
+
+	public void validateResponseLoginUnsuccessfull(String status, String msg) {
+		System.out.println("Validate Login access");
+		response.then()
+			.log().body().statusCode(400);
+		String error = response.jsonPath().getString("error");
+		System.out.println("Error captured: " + error);
+		Assert.assertEquals(error, msg);
 		BasePage.takeScreenshot(response);
 	}
 	
