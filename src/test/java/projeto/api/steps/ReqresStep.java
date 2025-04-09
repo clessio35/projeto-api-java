@@ -107,12 +107,6 @@ public class ReqresStep {
 	}
 	
 
-	@Then("eu valido que o erro retornado tem status code {string} e a mensagem \"\"Os campos {string} e {string} são obrigatórios\"\"")
-	public void eu_valido_que_o_erro_retornado_tem_status_code_e_a_mensagem_os_campos_e_são_obrigatórios(String string, String string2, String string3) {
-	     
-	     
-	}
-
 	@Then("eu valido que a lista de usuários foi retornada corretamente e paginada")
 	public void eu_valido_que_a_lista_de_usuários_foi_retornada_corretamente_e_paginada() {
 	     
