@@ -16,17 +16,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17 (Adoptium)
+      - name: Set up JDK 17 (Amazon Corretto)
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adoptopenjdk' 
-      
+          distribution: 'corretto'
+
       - name: Set up Maven
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adoptium'
+          distribution: 'corretto'
 
       - name: Build and Test with Maven
         run: mvn clean test -B
