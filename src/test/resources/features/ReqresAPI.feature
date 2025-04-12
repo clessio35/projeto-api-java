@@ -1,6 +1,6 @@
 Feature: Data manipulated API Reqres
 
-  @listar-usuarios
+  @listar-usuarios @all
   Scenario: Listar Usuários
     Given que acesso a API "<url>"
     When realizo uma request GET para "<endpoint>"
@@ -9,7 +9,7 @@ Feature: Data manipulated API Reqres
       | tag   | url                   | endpoint   |
       | @tag1 | https://reqres.in/api | /users     |
 
-  @listar-paginas
+  @listar-paginas @all
   Scenario: Listar usuários em páginas diferentes
     Given que acesso a API "<url>"
     When realizo uma request GET para "<endpoint>"
@@ -22,7 +22,7 @@ Feature: Data manipulated API Reqres
       | @tag5 	| https://reqres.in/api | /users?page=4        | 4    |
       | @tag6 	| https://reqres.in/api | /users?page=5        | 5    |
 
-	@detalhes-usuario
+	@detalhes-usuario @all
 	Scenario: Obter detalhes de um usuário existente
 	  Given que acesso a API "<url>"
 	  When realizo uma request GET para "<endpoint>"
@@ -40,7 +40,7 @@ Feature: Data manipulated API Reqres
 	    | @tag15| https://reqres.in/api | /users/10  | 10   |
 	    | @tag16| https://reqres.in/api | /users/11  | 11   |
 	
-	@usuario-inexistente
+	@usuario-inexistente @all
 	Scenario: Obter detalhes de um usuário inexistente
 	  Given que acesso a API "<url>"
 	  When realizo uma request GET para "<endpoint>"
@@ -49,7 +49,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                   | endpoint         | status | msg |
 	    | @tag17| https://reqres.in/api | /users/9999      | 404    |     |
 	
-	@criar-usuario-valido
+	@criar-usuario-valido @all
 	Scenario: Criar um usuário com dados válidos
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST para "<endpoint>"
@@ -58,7 +58,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                   | endpoint   | status |
 	    | @tag18| https://reqres.in/api | /users     | 201    |
 	
-	@criar-usuario-invalido
+	@criar-usuario-invalido @all
 	Scenario Outline: Criar um usuário com dados inválidos
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST com dados incorretos "<endpoint>" "<name>" "<job>"
@@ -70,7 +70,7 @@ Feature: Data manipulated API Reqres
 	    | @tag21| https://reqres.in/api | /users   | 201    | John Jacob Jingleheimer Schmidt | Developer |
 	    | @tag22| https://reqres.in/api | /users   | 201    |  John Doe        								|           |
 	
-	@atualizar-usuario-valido
+	@atualizar-usuario-valido @all
 	Scenario: Atualizar um usuário com dados válidos
 	  Given que acesso a API "<url>"
 	  When realizo uma request PUT para "<endpoint>"
@@ -79,7 +79,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                   | endpoint   |
 	    | @tag23| https://reqres.in/api | /users/2   |
 	
-	@atualizar-usuario-faltando-dados
+	@atualizar-usuario-faltando-dados @all
 	Scenario: Atualizar um usuário com dados faltando
 	  Given que acesso a API "<url>"
 	  When realizo uma request PUT para "<endpoint>" faltando informacoes
@@ -88,7 +88,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                   | endpoint   | 
 	    | @tag24| https://reqres.in/api | /users/2   | 
 	
-	@excluir-usuario-existente
+	@excluir-usuario-existente @all
 	Scenario: Excluir um usuário existente
 	  Given que acesso a API "<url>"
 	  When realizo uma request DELETE para "<endpoint>"
@@ -97,7 +97,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                   | endpoint     | status |
 	    | @tag25| https://reqres.in/api | /users/2     | 204    |
 	
-	@excluir-usuario-inexistente
+	@excluir-usuario-inexistente @all
 	Scenario: Excluir um usuário inexistente
 	  Given que acesso a API "<url>"
 	  When realizo uma request DELETE para "<endpoint>"
@@ -106,7 +106,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                  		 | endpoint         | status | 
 	    | @tag26| https://reqres.in/api    | /users/9999      | 204    |
 	
-	@login-valido
+	@login-valido @all
 	Scenario: Testar login com credenciais válidas
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST com as informacoes de login para "<endpoint>"
@@ -115,7 +115,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                  		 | endpoint   |
 	    | @tag27| https://reqres.in/api    | /login     |
 	
-	@login-sem-credenciais
+	@login-sem-credenciais @all
 	Scenario: Testar login sem fornecer credenciais
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST para "<endpoint>"
@@ -124,7 +124,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                   | endpoint   | status | msg                         |
 	    | @tag28| https://reqres.in/api | /login     | 400    | user not found              |
 	
-	@usuario-inexistente
+	@usuario-inexistente @all
 	Scenario: Obter detalhes de um usuário inexistente
 	  Given que acesso a API "<url>"
 	  When realizo uma request GET para "<endpoint>"
@@ -134,7 +134,7 @@ Feature: Data manipulated API Reqres
 	    | @tag29| https://reqres.in/api | /users/99999   | 404    | 
 	
 	
-	@criar-usuario-vazio
+	@criar-usuario-vazio @all
 	Scenario: Criar um usuário com dados vazios
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST sem dados para "<endpoint>"
@@ -143,7 +143,7 @@ Feature: Data manipulated API Reqres
 	    | tag   | url                  		 | endpoint     | 
 	    | @tag31| https://reqres.in/api    | /users       |
 	
-	@listar-usuarios-paginados
+	@listar-usuarios-paginados @all
 	Scenario: Listar vários usuários com paginação
 	  Given que acesso a API "<url>"
 	  When realizo uma request GET para "<endpoint>"
@@ -153,7 +153,7 @@ Feature: Data manipulated API Reqres
 	    | @tag32| https://reqres.in/api    | /users?page=1          | 200    |1			|
 	    | @tag33| https://reqres.in/api    | /users?page=2          | 200    |2			|	
 	
-	@criar-multiplo-usuarios
+	@criar-multiplo-usuarios @all
 	Scenario Outline: Criar múltiplos usuários
 	  Given que acesso a API "<url>"
 	  When realizo uma request POST com dados incorretos "<endpoint>" "<name>" "<job>"
@@ -164,7 +164,7 @@ Feature: Data manipulated API Reqres
 	    | @tag35| https://reqres.in/api    | /users     | Bob     | Designer | 201    |
 	    | @tag36| https://reqres.in/api    | /users     | Charlie | Tester   | 201    |
 	
-	@atualizar-usuario-faltando-job
+	@atualizar-usuario-faltando-job @all
 	Scenario: Atualizar um usuário com dados faltando
 	  Given que acesso a API "<url>"
 	  When realizo uma request PUT para "<endpoint>" faltando informacoes

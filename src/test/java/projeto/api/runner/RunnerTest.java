@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = "src/test/resources/features",
     glue = "projeto.api.steps",
-    tags = "@atualizar-usuario-faltando-job", 
+    tags = "@all", 
     plugin = {"pretty", "html:target/cucumber-reports", "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"}
 )
 public class RunnerTest {
