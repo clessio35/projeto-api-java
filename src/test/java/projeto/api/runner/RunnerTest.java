@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
     features = "src/test/resources/features",
     glue = "projeto.api.steps",
     tags = "@atualizar-usuario-faltando-job", 
-    plugin = {"pretty", "html:target/cucumber-reports"}
+    plugin = {"pretty", "html:target/cucumber-reports", "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"}
 )
 public class RunnerTest {
 
